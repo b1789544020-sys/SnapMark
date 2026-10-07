@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "SnapMark - 鎴浘 AI 鍔╂墜",
+  "name": "SnapMark - 截图 AI 助手",
   "version": "2.0.0",
-  "description": "鎴浘鍚庝氦缁?AI锛氭彁鍙栨枃瀛椼€佽В閲婃姤閿欍€佺炕璇戙€佽浆 Markdown 琛ㄦ牸銆佽瘑鍒唬鐮侊紝涔熸敮鎸佺澶?椹禌鍏嬬瓑鏍囨敞",
+  "description": "截图后交给 AI：提取文字、解释报错、翻译、转 Markdown 表格、识别代码，也支持箭头、马赛克等标注",
   "permissions": [
     "activeTab",
     "storage",
@@ -22,7 +22,7 @@
       "48": "icons/icon-48.png",
       "128": "icons/icon-128.png"
     },
-    "default_title": "SnapMark - 鎴浘 AI 鍔╂墜"
+    "default_title": "SnapMark - 截图 AI 助手"
   },
   "icons": {
     "16": "icons/icon-16.png",
@@ -36,9 +36,15 @@
   },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["content/content.js"],
-      "css": ["content/content.css"],
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content/content.js"
+      ],
+      "css": [
+        "content/content.css"
+      ],
       "run_at": "document_idle",
       "all_frames": false
     }
@@ -49,21 +55,21 @@
         "default": "Alt+Shift+S",
         "mac": "Command+Shift+S"
       },
-      "description": "鍖哄煙鎴浘"
+      "description": "区域截图"
     },
     "take-ai": {
       "suggested_key": {
         "default": "Alt+Shift+A",
         "mac": "Command+Shift+A"
       },
-      "description": "鎴浘骞剁洿鎺ラ棶 AI"
+      "description": "截图并直接问 AI"
     },
     "take-fullpage": {
       "suggested_key": {
         "default": "Alt+Shift+F",
         "mac": "Command+Shift+F"
       },
-      "description": "鏁撮〉鎴浘"
+      "description": "整页截图"
     }
   }
 }
