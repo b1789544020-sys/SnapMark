@@ -1,0 +1,69 @@
+{
+  "manifest_version": 3,
+  "name": "SnapMark - 鎴浘 AI 鍔╂墜",
+  "version": "2.0.0",
+  "description": "鎴浘鍚庝氦缁?AI锛氭彁鍙栨枃瀛椼€佽В閲婃姤閿欍€佺炕璇戙€佽浆 Markdown 琛ㄦ牸銆佽瘑鍒唬鐮侊紝涔熸敮鎸佺澶?椹禌鍏嬬瓑鏍囨敞",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "downloads",
+    "scripting",
+    "tabs",
+    "clipboardWrite"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    },
+    "default_title": "SnapMark - 鎴浘 AI 鍔╂墜"
+  },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "options_page": "options/options.html",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content/content.js"],
+      "css": ["content/content.css"],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "commands": {
+    "take-screenshot": {
+      "suggested_key": {
+        "default": "Alt+Shift+S",
+        "mac": "Command+Shift+S"
+      },
+      "description": "鍖哄煙鎴浘"
+    },
+    "take-ai": {
+      "suggested_key": {
+        "default": "Alt+Shift+A",
+        "mac": "Command+Shift+A"
+      },
+      "description": "鎴浘骞剁洿鎺ラ棶 AI"
+    },
+    "take-fullpage": {
+      "suggested_key": {
+        "default": "Alt+Shift+F",
+        "mac": "Command+Shift+F"
+      },
+      "description": "鏁撮〉鎴浘"
+    }
+  }
+}

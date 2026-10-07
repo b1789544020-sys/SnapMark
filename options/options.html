@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>SnapMark 设置</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>✨ SnapMark 设置</h1>
+      <p class="sub">配置视觉大模型后，截图就能直接提取文字、解释报错、翻译、转表格。</p>
+    </header>
+
+    <section class="card">
+      <h2>AI 服务</h2>
+
+      <div class="field">
+        <label for="preset">快速填充</label>
+        <select id="preset">
+          <option value="">— 选择服务商自动填入 —</option>
+          <option value="openai">OpenAI (gpt-4o-mini)</option>
+          <option value="deepseek">DeepSeek (deepseek-vl)</option>
+          <option value="dashscope">阿里通义千问 (qwen-vl-max)</option>
+          <option value="moonshot">Moonshot Kimi (moonshot-v1-8k-vision)</option>
+          <option value="zhipu">智谱 GLM (glm-4v-flash 免费)</option>
+          <option value="siliconflow">硅基流动 SiliconFlow</option>
+          <option value="ollama">本地 Ollama (llava)</option>
+        </select>
+        <p class="hint">选完仍需自行填写 API Key。本地 Ollama 无需 Key，填任意字符即可。</p>
+      </div>
+
+      <div class="field">
+        <label for="aiBaseUrl">Base URL</label>
+        <input type="text" id="aiBaseUrl" placeholder="https://api.openai.com/v1" spellcheck="false">
+        <p class="hint">需兼容 OpenAI <code>/chat/completions</code> 接口，注意结尾要带 <code>/v1</code>。</p>
+      </div>
+
+      <div class="field">
+        <label for="aiApiKey">API Key</label>
+        <div class="row">
+          <input type="password" id="aiApiKey" placeholder="sk-..." spellcheck="false">
+          <button type="button" id="toggleKey" class="ghost">显示</button>
+        </div>
+        <p class="hint">只保存在这台电脑的本机存储里（<code>storage.local</code>），不会同步到云端，也不会发给除你填写的服务商以外的任何地方。</p>
+      </div>
+
+      <div class="field">
+        <label for="aiModel">模型名称</label>
+        <input type="text" id="aiModel" placeholder="gpt-4o-mini" spellcheck="false">
+        <p class="hint">必须是支持图片输入的<strong>视觉模型</strong>，纯文本模型（如 deepseek-chat）会报错。</p>
+      </div>
+
+      <div class="field-grid">
+        <div class="field">
+          <label for="aiTemperature">Temperature</label>
+          <input type="number" id="aiTemperature" min="0" max="2" step="0.1">
+          <p class="hint">越低越稳定，OCR 建议 0~0.3。</p>
+        </div>
+        <div class="field">
+          <label for="aiMaxTokens">最大输出 Tokens</label>
+          <input type="number" id="aiMaxTokens" min="100" max="16000" step="100">
+          <p class="hint">长表格/长文翻译可调大。</p>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="aiCustomPrompt">全局附加要求（可选）</label>
+        <textarea id="aiCustomPrompt" rows="3" placeholder="例如：所有回答都用中文；代码风格遵循 PEP8；不要输出免责声明"></textarea>
+        <p class="hint">会追加到每次请求的 system prompt 后面。</p>
+      </div>
+
+      <div class="actions">
+        <button type="button" id="save" class="primary">保存设置</button>
+        <button type="button" id="test" class="ghost">测试连接</button>
+        <span id="status" class="status"></span>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>快捷键</h2>
+      <table class="keys">
+        <tr><td><kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd></td><td>区域截图</td></tr>
+        <tr><td><kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd></td><td>截图并直接问 AI</td></tr>
+        <tr><td><kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd></td><td>整页截图</td></tr>
+        <tr><td><kbd>Esc</kbd></td><td>取消 / 关闭</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Z</kbd></td><td>撤销标注</td></tr>
+      </table>
+      <p class="hint">想改快捷键？打开 <code>chrome://extensions/shortcuts</code>（Edge 为 <code>edge://extensions/shortcuts</code>）。</p>
+    </section>
+
+    <section class="card">
+      <h2>使用提示</h2>
+      <ul class="tips">
+        <li>先用<strong>箭头或矩形</strong>圈出重点，再点 AI 按钮 —— 标注会一起发给模型，回答更聚焦。</li>
+        <li>截图会等比压缩到长边 1600px 再上传，省 token 也更快。</li>
+        <li>AI 面板里的 <strong>➕</strong> 可以把回答直接写回图片上，方便截图分享。</li>
+        <li>浏览器内置页（<code>chrome://</code>、扩展商店、PDF 阅读器）无法注入脚本，属于浏览器限制。</li>
+      </ul>
+    </section>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

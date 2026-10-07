@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>SnapMark 测试页面</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      background: #f5f7fa;
+      color: #202124;
+    }
+    h1 { color: #1a73e8; margin-bottom: 8px; }
+    h2 { color: #1a73e8; margin-top: 32px; border-bottom: 2px solid #1a73e8; padding-bottom: 6px; }
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 16px 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .btn {
+      display: inline-block;
+      background: #1a73e8;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      margin: 4px;
+    }
+    table { width: 100%; border-collapse: collapse; }
+    table td, table th { padding: 10px; border: 1px solid #dadce0; }
+    table th { background: #1a73e8; color: #fff; }
+    code { background: #f1f3f4; padding: 2px 6px; border-radius: 3px; font-family: monospace; }
+    .highlight { background: #fff3cd; padding: 8px 12px; border-left: 4px solid #ffc107; margin: 12px 0; }
+  </style>
+</head>
+<body>
+  <h1>📸 SnapMark 网页截图标注器 - 测试页面</h1>
+  <p>这是一个用于测试 SnapMark 浏览器插件的演示页面。请先确保已安装并启用 SnapMark 插件。</p>
+
+  <div class="highlight">
+    <strong>使用步骤：</strong><br>
+    1. 点击浏览器右上角的 SnapMark 图标打开 popup<br>
+    2. 选择截图模式（区域 / 整页 / 元素）<br>
+    3. 拖拽选择截图区域，进入标注工具栏<br>
+    4. 添加箭头、矩形、文字、马赛克等标注<br>
+    5. 复制到剪贴板或下载 PNG / JPEG
+  </div>
+
+  <h2>测试区域 1：按钮组</h2>
+  <div class="card" id="test1">
+    <a href="#" class="btn">主要操作</a>
+    <a href="#" class="btn" style="background:#34a853">成功</a>
+    <a href="#" class="btn" style="background:#ea4335">删除</a>
+    <a href="#" class="btn" style="background:#fbbc04;color:#000">警告</a>
+  </div>
+
+  <h2>测试区域 2：数据表格</h2>
+  <div class="card" id="test2">
+    <table>
+      <thead>
+        <tr><th>姓名</th><th>角色</th><th>状态</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>张三</td><td>工程师</td><td>在线</td></tr>
+        <tr><td>李四</td><td>设计师</td><td>离线</td></tr>
+        <tr><td>王五</td><td>产品经理</td><td>在线</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>测试区域 3：代码块</h2>
+  <div class="card" id="test3">
+    <pre><code>function hello() {
+  console.log("Hello, SnapMark!");
+  return 42;
+}</code></pre>
+  </div>
+
+  <h2>测试区域 4：长内容（用于整页截图）</h2>
+  <div class="card" id="test4">
+    <p>向下滚动以查看更多内容，用于测试整页滚动截图功能...</p>
+    <p>📌 这是一段需要被涂黑/马赛克处理的内容，包含隐私信息。</p>
+    <p>📌 这是一段需要被涂黑/马赛克处理的内容，包含隐私信息。</p>
+    <p>📌 这是一段需要被涂黑/马赛克处理的内容，包含隐私信息。</p>
+  </div>
+
+  <h2>测试区域 5：表单</h2>
+  <div class="card" id="test5">
+    <label>用户名：<input type="text" placeholder="输入用户名"></label><br><br>
+    <label>邮箱：<input type="email" placeholder="user@example.com"></label><br><br>
+    <label>备注：<textarea rows="3" cols="40"></textarea></label>
+  </div>
+
+  <div style="height: 800px;"></div>
+
+  <h2>页面底部</h2>
+  <p>如果你能看到这里，说明整页截图工作正常 ✅</p>
+</body>
+</html>

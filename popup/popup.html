@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>SnapMark 截图 AI 助手</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">✨</div>
+      <h1>SnapMark</h1>
+      <p class="subtitle">截图 AI 助手</p>
+    </header>
+
+    <div id="ai-banner" class="ai-banner hidden">
+      <span class="banner-text">还没配置 AI 模型</span>
+      <button id="btn-setup" class="banner-btn">立即配置</button>
+    </div>
+
+    <div class="actions">
+      <button id="btn-ai" class="action-btn ai-primary">
+        <span class="icon">🤖</span>
+        <div>
+          <div class="action-title">截图问 AI</div>
+          <div class="action-desc">提取文字 / 解释 / 翻译</div>
+        </div>
+        <kbd>Alt+Shift+A</kbd>
+      </button>
+
+      <button id="btn-region" class="action-btn primary">
+        <span class="icon">✂️</span>
+        <div>
+          <div class="action-title">区域截图</div>
+          <div class="action-desc">拖拽选择区域</div>
+        </div>
+        <kbd>Alt+Shift+S</kbd>
+      </button>
+
+      <button id="btn-fullpage" class="action-btn">
+        <span class="icon">📄</span>
+        <div>
+          <div class="action-title">整页截图</div>
+          <div class="action-desc">截取完整长图</div>
+        </div>
+        <kbd>Alt+Shift+F</kbd>
+      </button>
+
+      <button id="btn-element" class="action-btn">
+        <span class="icon">🎯</span>
+        <div>
+          <div class="action-title">元素截图</div>
+          <div class="action-desc">点击页面元素</div>
+        </div>
+      </button>
+    </div>
+
+    <div class="settings">
+      <h3>标注默认值</h3>
+
+      <div class="setting-row">
+        <label>画笔颜色</label>
+        <input type="color" id="setting-color" value="#ff3b30">
+      </div>
+
+      <div class="setting-row">
+        <label>画笔粗细</label>
+        <div class="slider-group">
+          <input type="range" id="setting-stroke" min="1" max="20" value="3">
+          <span id="setting-stroke-val">3</span>
+        </div>
+      </div>
+
+      <div class="setting-row">
+        <label>文字字号</label>
+        <input type="number" id="setting-fontsize" min="8" max="72" value="18">
+      </div>
+
+      <div class="setting-row">
+        <label>JPEG 质量</label>
+        <div class="slider-group">
+          <input type="range" id="setting-quality" min="0.1" max="1" step="0.05" value="0.92">
+          <span id="setting-quality-val">0.92</span>
+        </div>
+      </div>
+
+      <div class="setting-row">
+        <label>序号标注</label>
+        <label class="switch">
+          <input type="checkbox" id="setting-numbering">
+          <span class="slider-toggle"></span>
+        </label>
+      </div>
+    </div>
+
+    <footer>
+      <button id="btn-options" class="link-btn">⚙ AI 与高级设置</button>
+      <p>v2.0.0 · 按 <kbd>Esc</kbd> 取消截图</p>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
