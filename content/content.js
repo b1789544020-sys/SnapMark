@@ -702,6 +702,8 @@
   }
 
   function updateCursor() {
+    // 选区阶段尚未创建标注画布，工具切换后才需要更新画布光标。
+    if (!annotationCanvas) return;
     const cursors = {
       none: 'default',
       arrow: 'crosshair',

@@ -305,6 +305,21 @@ def check_ai_wiring():
         passed.append('getAIConfig 不回传 API Key 给页面脚本')
 
 
+def check_capture_wiring():
+    """captureVisibleTab 必须接收 windowId，不能把 sender.tab.id 当作窗口。"""
+    bg = read('background.js')
+    valid = (
+        'captureThrottled(tab.windowId)' in bg
+        and 'function captureThrottled(windowId)' in bg
+        and 'chrome.tabs.captureVisibleTab(windowId,' in bg
+        and not re.search(r'captureVisibleTab\(tabId\s*,', bg)
+    )
+    if valid:
+        passed.append('区域截图向 captureVisibleTab 传递 windowId（不是 tabId）')
+    else:
+        errors.append('captureVisibleTab 参数必须来自 tab.windowId，不能使用 tabId')
+
+
 def main():
     print('=' * 64)
     print(' SnapMark v2 自检')
@@ -318,6 +333,7 @@ def main():
     m = check_manifest()
     check_commands(m)
     check_actions()
+    check_capture_wiring()
     check_dom_ids()
     check_content_ids()
     check_ai_wiring()

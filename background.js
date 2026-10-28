@@ -91,11 +91,12 @@ async function handleMessage(request, sender) {
 
     case 'captureVisibleTab': {
       // content 脚本请求截取当前标签页（已做频率节流）
-      const tabId = sender.tab
-        ? sender.tab.id
-        : ((await chrome.tabs.query({ active: true, currentWindow: true }))[0] || {}).id;
-      if (!tabId) throw new Error('No active tab');
-      const dataUrl = await captureThrottled(tabId);
+      const tab = sender.tab
+        ? sender.tab
+        : (await chrome.tabs.query({ active: true, currentWindow: true }))[0];
+      if (!tab) throw new Error('No active tab');
+      // captureVisibleTab 的第一个参数是 windowId，不是 tabId。
+      const dataUrl = await captureThrottled(tab.windowId);
       return { dataUrl };
     }
 
@@ -150,14 +151,14 @@ const CAPTURE_MIN_INTERVAL = 550;
 let lastCaptureAt = 0;
 let captureChain = Promise.resolve();
 
-function captureThrottled(tabId) {
+function captureThrottled(windowId) {
   const run = async () => {
     const wait = CAPTURE_MIN_INTERVAL - (Date.now() - lastCaptureAt);
     if (wait > 0) await sleep(wait);
 
     for (let attempt = 0; attempt < 3; attempt++) {
       try {
-        const dataUrl = await chrome.tabs.captureVisibleTab(tabId, { format: 'png' });
+        const dataUrl = await chrome.tabs.captureVisibleTab(windowId, { format: 'png' });
         lastCaptureAt = Date.now();
         return dataUrl;
       } catch (err) {
