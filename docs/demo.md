@@ -1,14 +1,14 @@
 # SnapMark 真实扩展演示：从区域截图到 AI 写回
 
-> 本页录像来自真实 Chromium MV3 扩展操作。截图、Canvas 标注、Service Worker 消息路由、SSE 解析、AI 结果写回和 PNG 下载均走项目代码；仅视觉模型由本机确定性 mock 替代，**不调用上游模型 API**。
+> 本页早期图文记录来自真实 Chromium MV3 扩展操作。截图、Canvas 标注、Service Worker 消息路由、SSE 解析、AI 结果写回和 PNG 下载均走项目代码；仅视觉模型由本机确定性 mock 替代，**不调用上游模型 API**。
 
-## 视频
+## 1 分 41 秒中文演示
 
-<video controls playsinline preload="metadata" poster="demo/web/02-arrow-and-mosaic.png" src="demo/web/SnapMark-demo.mp4" width="100%"></video>
+**[直接打开 / 下载中文演示 MP4](../SnapMark-demo-zh.mp4)**
 
-**[直接打开 / 下载 MP4](demo/web/SnapMark-demo.mp4)** · [查看实际导出的 PNG](demo/web/SnapMark-annotated.png) · [项目源码与安装说明](../README.md)
+## 早期图文验证记录
 
-录像流程：框选数据表格 → 添加箭头 → 马赛克隐藏首行姓名 → OCR 流式输出 → 翻译成英文 → 将翻译写回图片 → 下载 PNG。
+[查看实际导出的 PNG](demo/web/SnapMark-annotated.png) · [项目源码与安装说明](../README.md)
 
 ## 这次运行实际验证了什么
 
