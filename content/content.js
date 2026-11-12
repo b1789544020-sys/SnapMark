@@ -152,8 +152,10 @@
     function onMouseMoveHover(e) {
       // 元素高亮模式
       if (state.mode === 'element' && state.phase === 'selecting') {
-        const el = document.elementFromPoint(e.clientX, e.clientY);
-        if (el && el !== activeElementHover && !isPartOfSnapmark(el)) {
+        // 覆盖层位于页面最上方；从层叠命中列表中找到它下面的真实网页元素。
+        const el = document.elementsFromPoint(e.clientX, e.clientY)
+          .find(candidate => !isPartOfSnapmark(candidate));
+        if (el && el !== activeElementHover) {
           activeElementHover = el;
           highlightElement(el);
         }
@@ -439,6 +441,9 @@
     }
 
     showProgress('长页面截图中...', 0);
+    const captureToast = $('snapmark-toast');
+    const captureToastText = captureToast ? captureToast.textContent : '';
+    if (captureToast) captureToast.remove();
 
     // 逐段滚动截图（background 已做频率节流，这里不会触发限流）
     const segments = [];
@@ -448,12 +453,15 @@
     let curY = 0;
 
     while (curY < cappedHeight) {
+      const progress = $('snapmark-progress');
+      if (progress) progress.style.display = 'none';
       window.scrollTo(0, curY);
-      // 等滚动稳定 + 懒加载图片补齐
+      // 等滚动稳定 + 懒加载图片补齐，同时确保进度层不会进入截图。
       await new Promise(r => setTimeout(r, 250));
       const actualY = window.scrollY;   // 页面可能滚不到目标位置（已到底）
 
       const response = await chrome.runtime.sendMessage({ action: 'captureVisibleTab' });
+      if (progress) progress.style.display = '';
       if (!response || !response.dataUrl) {
         throw new Error((response && response.error) || '截图失败');
       }
@@ -487,6 +495,7 @@
     state.screenshotDpr = dpr;
     state.phase = 'annotating';
     hideProgress();
+    if (cappedHeight < totalHeight && captureToastText) showToast(captureToastText);
     showAnnotationUI();
   }
 

@@ -18,6 +18,9 @@ dist/
 
 # ---- Logs / temp / backups ----
 *.log
+demo_work/
+演示视频/
+Demo视频是怎么做出来的？.txt
 *.bak
 *.bak[0-9]*
 *.orig
